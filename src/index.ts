@@ -1,38 +1,34 @@
 /* eslint-disable no-console */
-import * as mongoose from 'mongoose';
 import menash, { ConsumerMessage } from 'menashmq';
-import Server from './express/server';
 import config from './config';
 
-const { mongo, rabbit, service } = config;
+const { rabbit } = config;
 
-const initializeMongo = async () => {
-    console.log('Connecting to Mongo...');
+require('dotenv').config();
 
-    await mongoose.connect(mongo.uri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true });
+export const initializeRabbit = async (): Promise<void> => {
+    console.log('Trying connect to rabbit...');
 
-    console.log('Mongo connection established');
-};
-
-const initializeRabbit = async () => {
-    console.log('Connecting to Rabbit...');
-
-    await menash.connect(rabbit.uri, rabbit.retryOptions);
+    await menash.connect(rabbit.uri);
+    await menash.declareQueue(rabbit.consumeQueue);
+    await menash.declareQueue(rabbit.produceQueue);
+    await menash.declareQueue(rabbit.logQueue);
 
     console.log('Rabbit connected');
 
-    const featureConsumeFunction = (msg: ConsumerMessage) => {
-        console.log('Received message: ', msg.getContent());
-    };
+    await menash.queue(rabbit.consumeQueue).activateConsumer(
+        async (msg: ConsumerMessage) => {
+            const obj: queueObject = msg.getContent() as queueObject;
 
-    await menash.declareTopology({
-        queues: [{ name: 'feature-queue', options: { durable: true } }],
-        exchanges: [{ name: 'feature-exchange', type: 'fanout', options: { durable: true } }],
-        bindings: [{ source: 'feature-exchange', destination: 'feature-queue' }],
-        consumers: [{ queueName: 'feature-queue', onMessage: featureConsumeFunction }],
-    });
+            const matchedRecord: matchedRecordType = basicMatch(obj);
 
-    console.log('Rabbit initialized');
+            await menash.send(rabbit.afterMatch, { record: matchedRecord, dataSource: obj.dataSource, runUID: obj.runUID });
+
+            msg.ack();
+        },
+        { noAck: false },
+    );
+};nsole.log('Rabbit initialized');
 };
 
 const main = async () => {
