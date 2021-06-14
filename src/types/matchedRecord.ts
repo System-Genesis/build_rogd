@@ -16,9 +16,9 @@ type matchedRecord = {
     address?: string;
     mail?: string;
     job?: string;
-    hierarchy?: string;
-    userID?: string;
-    source?: string;
+    hierarchy: string;
+    userID: string;
+    source: string;
 };
 
 export default matchedRecord;

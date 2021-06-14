@@ -4,3 +4,5 @@ type organizationGroupObj = {
     hierarchy: string;
     status: string;
 };
+
+export default organizationGroupObj;
