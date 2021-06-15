@@ -3,8 +3,8 @@ import * as math from '../src/simpleModuleToMock';
 import * as math3 from '../src/simpleModuleUsingMocked';
 
 jest.mock('../src/simpleModuleToMock');
-// ts-jest "mocked" function returns math module "as is", but with mocked type
-// ('cuz jest.mock's "side effects" is overriding the original module with mocks)
+// ts-jest 'mocked' function returns math module 'as is', but with mocked type
+// ('cuz jest.mock's 'side effects' is overriding the original module with mocks)
 const mockedMath = mocked(math, true);
 
 describe('example unit tests', () => {

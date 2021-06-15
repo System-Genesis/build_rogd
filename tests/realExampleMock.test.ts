@@ -3,7 +3,7 @@ import FolderModel from '../src/express/feature/model';
 import FeatureManager from '../src/express/feature/manager';
 
 jest.mock('../src/express/feature/model');
-// "mocked" function returns FolderModel "as is", but with mocked type ('cuz jest.mock's "side effects" is overriding the original module with mocks)
+// 'mocked' function returns FolderModel 'as is', but with mocked type ('cuz jest.mock's 'side effects' is overriding the original module with mocks)
 const mockedFolderModel = mocked(FolderModel, true);
 
 describe('example unit tests', () => {
