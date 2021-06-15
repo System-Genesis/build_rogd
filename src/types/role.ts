@@ -1,7 +1,7 @@
 type roleObj = {
     roleId: string;
     jobTitle?: string;
-    digitalIdentityUniqeId: string;
+    digitalIdentityUniqueId: string;
     hierarchy: string;
     source: string;
 };

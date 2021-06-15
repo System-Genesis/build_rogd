@@ -1,21 +1,21 @@
 import matchedRecordType from '../types/matchedRecord';
 import fieldNames from '../config/fieldNames';
 import cleanObj from '../utils/removeBlankAtt';
-import digitalIndentityObj from '../types/digitalIndentity';
-import assembleUnieqID from '../utils/assembleUniqeID';
+import digitalIdentityObj from '../types/digitalIdentity';
+import assembleUniqueID from '../utils/assembleUniqueID';
 
 export default (record: matchedRecordType, identifier: string) => {
 
-    const digitalIndentity: digitalIndentityObj = {
+    const digitalIdentity: digitalIdentityObj = {
         type: record.source === fieldNames.sources.mir ? 'digUser' : 'domUser',
         source: record.source,
         mail: record.mail,
-        uniqeId: assembleUnieqID(record),
+        uniqueId: assembleUniqueID(record),
         entityId: identifier,
-        isRoleAttachable: record.source === fieldNames.sources.mir ? false : true
+        isRoleAttachable: record.source !== fieldNames.sources.mir
     }
 
-    cleanObj(digitalIndentity);
+    cleanObj(digitalIdentity);
 
-    return digitalIndentity;
+    return digitalIdentity;
 }

@@ -1,10 +1,10 @@
-type digitalIndentityObj = {
+type digitalIdentityObj = {
     type: string;
     source: string;
     mail?: string;
-    uniqeId: string;
+    uniqueId: string;
     entityId: string;
     isRoleAttachable: boolean;
 };
 
-export default digitalIndentityObj;
+export default digitalIdentityObj;
