@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-restricted-syntax */
 import digitalIdentityObj from '../types/digitalIdentity';
 import roleObj from '../types/role';
 import organizationGroupObj from '../types/organizationGroup';
@@ -8,4 +10,4 @@ export default (obj: digitalIdentityObj | roleObj | organizationGroupObj): void 
             delete obj[propName];
         }
     }
-}
+};
