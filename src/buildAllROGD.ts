@@ -17,7 +17,7 @@ const { rabbit } = config;
 
 const buildROGD = (matchedRecord: matchedRecordType, identifier: string): produceQueueObj => {
     const di: digitalIdentityObj = buildDI(matchedRecord, identifier);
-    const role: roleObj = buildRole(matchedRecord, di.uniqueId);
+    const role: roleObj | null = matchedRecord.hierarchy && di.isRoleAttachable ? buildRole(matchedRecord, di.uniqueId) : null;
     const og: organizationGroupObj | null = matchedRecord.hierarchy ? buildOG(matchedRecord) : null;
 
     return {

@@ -5,7 +5,7 @@ import organizationGroupObj from './organizationGroup';
 type produceQueueObj = {
     og: organizationGroupObj | null;
     di: digitalIdentityObj;
-    role: roleObj;
-}
+    role: roleObj | null;
+};
 
 export default produceQueueObj;
