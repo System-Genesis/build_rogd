@@ -17,9 +17,12 @@ export const initializeRabbit = async (): Promise<void> => {
     console.log('Rabbit connected');
 
     await menash.queue(rabbit.consumeQueue).activateConsumer(
+        
         async (msg: ConsumerMessage) => {
             const obj: mergedObj = msg.getContent() as mergedObj;
-
+           
+            
+            
             buildAllROGD(obj);
 
             msg.ack();
