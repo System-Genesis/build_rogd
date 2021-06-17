@@ -7,5 +7,5 @@ export default {
         sf: 'sf_name',
         city: 'city_name',
         mir: 'mir_name',
-    }
-}
+    },
+};
