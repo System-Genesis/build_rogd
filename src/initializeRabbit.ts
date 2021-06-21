@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import menash, { ConsumerMessage } from 'menashmq';
 import config from './config';
-import mergedObj from './types/mergedObject';
+import matchedRecord from './types/matchedRecord';
 import buildAllROGD from './buildAllROGD';
 
 const { rabbit } = config;
@@ -19,8 +19,8 @@ export const initializeRabbit = async (): Promise<void> => {
 
     await menash.queue(rabbit.consumeQueue).activateConsumer(
         async (msg: ConsumerMessage) => {
-            const obj: mergedObj = msg.getContent() as mergedObj;
-            buildAllROGD(obj);
+            const record: matchedRecord = msg.getContent() as matchedRecord;
+            buildAllROGD(record);
 
             msg.ack();
         },

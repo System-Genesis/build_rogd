@@ -19,6 +19,7 @@ type matchedRecord = {
     hierarchy: string;
     userID: string;
     source: string;
+    goalUserId?: string;
 };
 
 export default matchedRecord;
