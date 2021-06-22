@@ -16,8 +16,8 @@ type matchedRecord = {
     address?: string;
     mail?: string;
     job?: string;
-    hierarchy: string;
-    userID: string;
+    hierarchy?: string;
+    userID?: string;
     source: string;
     goalUserId?: string;
 };

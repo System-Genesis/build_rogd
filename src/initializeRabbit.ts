@@ -3,7 +3,7 @@
 import menash, { ConsumerMessage } from 'menashmq';
 import config from './config';
 import matchedRecord from './types/matchedRecord';
-import buildAllROGD from './buildAllROGD';
+import buildAllROGD from './buildROGD';
 
 const { rabbit } = config;
 
