@@ -6,8 +6,8 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install --production=false --silent
 COPY . .
 
-RUN chmod g+rwx -R /usr/src/app
+RUN npm run build || true
+CMD [ "npm", "start" ]
 
-CMD npm run dev
+EXPOSE 9000
 
-EXPOSE 8000
