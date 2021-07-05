@@ -1,6 +1,7 @@
+/* eslint-disable import/prefer-default-export */
 import fieldNames from './fieldNames';
 
-export const ROLE_ID_SUFFIXES :[string, string][]= [
+export const ROLE_ID_SUFFIXES: [string, string][] = [
     [fieldNames.sources.ads, '@rabiran'],
     [fieldNames.sources.es, '@jello'],
     [fieldNames.sources.adNN, '@adnn'],
