@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import buildDI from '../src/builds/buildDI';
 import buildOG from '../src/builds/buildOG';
 import buildRole from '../src/builds/buildRole';
