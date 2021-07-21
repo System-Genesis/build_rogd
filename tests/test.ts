@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import buildDI from '../src/builds/buildDI';
 import buildOG from '../src/builds/buildOG';
 import buildRole from '../src/builds/buildRole';
@@ -12,7 +11,7 @@ describe('Match City unit testings', () => {
         const record: matchedRecord = {
             entityType: 'agumon',
             userID: 'ii251578198',
-            mobilePhone: '0514047708',
+            mobilePhone: ['0514047708'],
             clearance: '4',
             firstName: 'Liza',
             lastName: 'Gerhold',
@@ -36,7 +35,7 @@ describe('Match City unit testings', () => {
         const record: matchedRecord = {
             entityType: 'agumon',
             userID: 'ii251578198',
-            mobilePhone: '0514047708',
+            mobilePhone: ['0514047708'],
             clearance: '4',
             firstName: 'Liza',
             lastName: 'Gerhold',
@@ -58,7 +57,7 @@ describe('Match City unit testings', () => {
         const record: matchedRecord = {
             entityType: 'agumon',
             userID: 'ii251578198',
-            mobilePhone: '0514047708',
+            mobilePhone: ['0514047708'],
             clearance: '4',
             firstName: 'Liza',
             lastName: 'Gerhold',
