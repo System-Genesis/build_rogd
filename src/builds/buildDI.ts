@@ -10,7 +10,7 @@ export default (record: matchedRecordType, identifier: string) => {
         mail: record.mail,
         uniqueId: record.userID,
         entityId: identifier,
-        isRoleAttachable: record.source !== fieldNames.sources.mir,
+        isRoleAttachable: record.source !== fieldNames.sources.mir && record.source !== fieldNames.sources.city,
     };
 
     cleanObj(digitalIdentity);
