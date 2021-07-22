@@ -5,12 +5,12 @@ import digitalIdentityObj from '../types/digitalIdentity';
 
 export default (record: matchedRecordType, identifier: string) => {
     const digitalIdentity: digitalIdentityObj = {
-        type: record.source === fieldNames.sources.mir ? 'Kaki' : 'domUser',
+        type: record.source === fieldNames.sources.mir || record.source === fieldNames.sources.city ? 'kaki' : 'domUser',
         source: record.source,
         mail: record.mail,
         uniqueId: record.userID,
         entityId: identifier,
-        isRoleAttachable: record.source !== fieldNames.sources.mir,
+        isRoleAttachable: record.source !== fieldNames.sources.mir && record.source !== fieldNames.sources.city,
     };
 
     cleanObj(digitalIdentity);
