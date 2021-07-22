@@ -28,7 +28,7 @@ describe('Match City unit testings', () => {
         const og: organizationGroupObj | null = role ? buildOG(record) : null;
         expect(role).toEqual(null);
         expect(og).toEqual(null);
-        expect(di.type).toEqual('digUser');
+        expect(di.type).toEqual('kaki');
     });
 
     test("No hierarchy -> don't build OG and Role", () => {
@@ -66,7 +66,7 @@ describe('Match City unit testings', () => {
             dischargeDay: '2023-10-28T07:13:35.842Z',
             job: 'Principal Communications Associate',
             hierarchy: 'wallmart/dolorem/ea',
-            source: 'city_name',
+            source: 'es_name',
         };
         const identifier: string = (record.identityCard || record.personalNumber || record.goalUserId)!;
         const di: digitalIdentityObj = buildDI(record, identifier);
@@ -74,7 +74,7 @@ describe('Match City unit testings', () => {
         const og: organizationGroupObj | null = role ? buildOG(record) : null;
         expect(og).toEqual({
             name: 'ea',
-            source: 'city_name',
+            source: 'es_name',
             hierarchy: 'wallmart/dolorem',
             status: 'active',
         });
