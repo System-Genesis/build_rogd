@@ -13,7 +13,7 @@ export const initializeRabbit = async (): Promise<void> => {
     try {
         sendLog('info', 'Trying connect to rabbit...', true);
 
-        await menash.connect(rabbit.uri);
+        await menash.connect(rabbit.uri, rabbit.retryOptions);
         await menash.declareQueue(rabbit.consumeQueue);
         await menash.declareQueue(rabbit.produceQueue);
         await menash.declareQueue(rabbit.logQueue);
