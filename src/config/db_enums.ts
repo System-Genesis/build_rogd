@@ -1,7 +1,6 @@
-/* eslint-disable import/prefer-default-export */
 import fieldNames from './fieldNames';
 
-export const ROLE_ID_SUFFIXES: [string, string][] = [
+const ROLE_ID_SUFFIXES: [string, string][] = [
     [fieldNames.sources.ads, 'rabiran'],
     [fieldNames.sources.lmn, 'lmn'],
     [fieldNames.sources.mdn, 'mdn'],
@@ -11,4 +10,6 @@ export const ROLE_ID_SUFFIXES: [string, string][] = [
     [fieldNames.sources.city, 'city'],
 ];
 
-export const oneTreeSources = [fieldNames.sources.ads, fieldNames.sources.lmn, fieldNames.sources.mdn];
+const oneTreeSources = [fieldNames.sources.ads, fieldNames.sources.lmn, fieldNames.sources.mdn];
+
+export { oneTreeSources, ROLE_ID_SUFFIXES };
