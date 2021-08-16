@@ -13,6 +13,7 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "prettier": "prettier --config .prettierrc.js 'src/**/*.ts' --check",
     "prettier:fix": "prettier --config .prettierrc.js 'src/**/*.ts' --write",
+    "dev2": " nodemon ./src/index.ts",
     "clean": "rimraf dist"
   },
   "author": "Alexander Gurevich",
