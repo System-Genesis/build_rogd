@@ -5,7 +5,7 @@ import digitalIdentityObj from '../types/digitalIdentity';
 
 export default (record: matchedRecordType, identifier: string) => {
     const digitalIdentity: digitalIdentityObj = {
-        type: record.source === fieldNames.sources.mir ? 'kaki' : 'domUser',
+        type: record.source === fieldNames.sources.mir ? 'virtualUser' : 'domainUser',
         source: record.source,
         mail: record.mail,
         uniqueId: record.userID,
