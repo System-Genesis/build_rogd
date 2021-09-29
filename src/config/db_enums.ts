@@ -1,6 +1,6 @@
 import fieldNames from './fieldNames';
 
-const ROLE_ID_SUFFIXES: [string, string][] = [
+export const ROLE_ID_SUFFIXES: [string, string][] = [
     [fieldNames.sources.ads, 'rabiran'],
     [fieldNames.sources.lmn, 'lmn'],
     [fieldNames.sources.mdn, 'mdn'],
@@ -10,6 +10,6 @@ const ROLE_ID_SUFFIXES: [string, string][] = [
     [fieldNames.sources.city, 'city'],
 ];
 
-const oneTreeSources = [fieldNames.sources.ads, fieldNames.sources.lmn, fieldNames.sources.mdn];
+export const oneTreeSources = [fieldNames.sources.ads, fieldNames.sources.lmn, fieldNames.sources.mdn];
 
-export { oneTreeSources, ROLE_ID_SUFFIXES };
+// export { oneTreeSources, ROLE_ID_SUFFIXES };

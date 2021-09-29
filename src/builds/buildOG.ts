@@ -7,6 +7,5 @@ export default (record: matchedRecordType): organizationGroupObj => {
         name: record.hierarchy!.substring(record.hierarchy!.lastIndexOf('/') + 1),
         source: record.source,
         hierarchy: record.hierarchy!.substring(0, record.hierarchy!.lastIndexOf('/')),
-        status: 'active',
     };
 };
