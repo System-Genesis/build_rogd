@@ -11,7 +11,7 @@ import sendLog from './logger';
 export default (record: matchedRecordType): void => {
     const identifier: string = (record.identityCard || record.personalNumber || record.goalUserId)!;
     const di: digitalIdentityObj = buildDI(record, identifier);
-    const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record, di.uniqueId) : null;
+    const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record) : null;
     const og: organizationGroupObj | null = role ? buildOG(record) : null;
 
     if (!role && !og) {
