@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import menash, { ConsumerMessage } from 'menashmq';
 import config from './config';
 import matchedRecord from './types/matchedRecord';
@@ -5,20 +6,19 @@ import buildAllROGD from './buildROGD';
 import digitalIdentityObj from './types/digitalIdentity';
 import roleObj from './types/role';
 import organizationGroupObj from './types/organizationGroup';
-import sendLog from './logger';
 
 const { rabbit } = config;
 
 export const initializeRabbit = async (): Promise<void> => {
     try {
-        sendLog('info', 'Trying connect to rabbit...', true);
+        console.log('Trying connect to rabbit...');
 
         await menash.connect(rabbit.uri, rabbit.retryOptions);
         await menash.declareQueue(rabbit.consumeQueue);
         await menash.declareQueue(rabbit.produceQueue);
         await menash.declareQueue(rabbit.logQueue);
 
-        sendLog('info', 'Rabbit connected', true);
+        console.log('Rabbit connected');
 
         await menash.queue(rabbit.consumeQueue).activateConsumer(
             async (msg: ConsumerMessage) => {
@@ -30,15 +30,12 @@ export const initializeRabbit = async (): Promise<void> => {
             { noAck: false },
         );
 
-        sendLog('info', 'Rabbit initialized', true);
-    } catch (err) {
-        sendLog('info', 'Rabbit initialized', true, { err });
+        console.log('Rabbit initialized');
+    } catch (err: any) {
+        console.log('Rabbit Not initialized', err.message);
     }
 };
 
 export const sendToCreate = (di: digitalIdentityObj, og: organizationGroupObj | null, role: roleObj | null): void => {
-    sendLog('info', 'Sending ROGD to createRGBE', false, {
-        user: di.uniqueId,
-    });
     menash.send(rabbit.produceQueue, { di, role, og });
 };

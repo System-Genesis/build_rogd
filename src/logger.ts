@@ -1,41 +1,6 @@
-import { menash } from 'menashmq';
-import * as winston from 'winston';
-import envConfig from './config/index';
-import { logObject } from './types/log';
+import logger from 'logger-genesis';
+import config from './config/index';
 
-const { rabbit } = envConfig;
-
-const { config, format } = winston;
-
-const logger = winston.createLogger({
-    levels: config.npm.levels,
-
-    format: format.combine(
-        format.colorize(),
-        format.timestamp({
-            format: 'YYYY-MM-DD HH:mm:ss',
-        }),
-        format.splat(),
-        format.simple(),
-    ),
-    transports: [new winston.transports.Console()],
-});
-
-export default (level: string, message: string, localLog: boolean, extraFields?: any): void => {
-    const logToSend: logObject = {
-        level,
-        message,
-        system: 'Traking',
-        service: 'Build ROGD',
-    };
-
-    if (extraFields) {
-        logToSend.extraFields = extraFields;
-    }
-
-    if (!localLog) {
-        menash.send(rabbit.logQueue, logToSend);
-    }
-
-    logger[level](`${message} ${!extraFields ? '' : JSON.stringify(extraFields)}`);
+export default async () => {
+    await logger.initialize(config.systemName, config.serviceName, config.rabbit.uri, config.rabbit.logQueue, false, config.rabbit.retryOptions);
 };
