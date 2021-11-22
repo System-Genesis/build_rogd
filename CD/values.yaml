@@ -1,4 +1,4 @@
-name: "build_rogd"
+name: "build-rogd"
 replicaCount: 1
 
 images:
@@ -14,18 +14,12 @@ service:
     port: 3000
 
 volume:
-  -name: build-rogd-volume-fieldNames
+  -name: build-rogd-volume
    mountPath: /usr/src/app/dist/config/
    secretName: azure-secret 
-   shareName: system-genesis/ 
-   type: azurefile
-  
-  -name: build-rogd-volume-db_enums
-   mountPath: /usr/src/app/dist/config/
-   secretName: azure-secret 
-   shareName: system-genesis/ 
+   shareName: system-genesis/build-rogd
    type: azurefile
 
 config:
   configmaps: 
-    name: build_rogd
+    name: build-rogd
