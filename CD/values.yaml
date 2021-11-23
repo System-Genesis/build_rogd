@@ -1,10 +1,10 @@
-name: "build_rogd"
+name: "build-rogd"
 replicaCount: 1
 
 images:
   PullSecrets: 
     name: kartingreg
-  repository: rabazhub.azurecr.io/values-test
+  repository: genesisproject.azurecr.io/build-rogd
   tag: "latest"
 
 service:
@@ -13,22 +13,13 @@ service:
   - name: http
     port: 3000
 
-# volume:
-#   -name:
-#    mountPath:
-#    type:
-#    claimName:
+volume:
+  - name: build-rogd-volume
+    mountPath: /usr/src/app/dist/config/
+    secretName: azure-secret 
+    shareName: system-genesis/build-rogd
+    type: azurefile
 
 config:
   configmaps: 
-    name: build_rogd
-
-ingress:
-  enabled: true
-  hosts:
-  - host: test-cd.branch-yesodot.org
-    paths:
-      - path: /message
-        service: testname
-        port: "3000"
-  
+    name: build-rogd
