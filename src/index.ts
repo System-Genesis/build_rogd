@@ -8,5 +8,5 @@ const main = async () => {
 };
 
 main().catch((err) => {
-    logger.logError(false, 'Unknown error', 'SYSTEM', err.message);
+    logger.error(false, 'SYSTEM', 'Unknown error', err.message);
 });
