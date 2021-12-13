@@ -24,7 +24,7 @@ describe('Match City unit testings', () => {
         };
         const identifier: string = (record.identityCard || record.personalNumber || record.goalUserId)!;
         const di: digitalIdentityObj = buildDI(record, identifier);
-        const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record, di.uniqueId) : null;
+        const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record) : null;
         const og: organizationGroupObj | null = role ? buildOG(record) : null;
         expect(role).toEqual(null);
         expect(og).toEqual(null);
@@ -47,7 +47,7 @@ describe('Match City unit testings', () => {
         };
         const identifier: string = (record.identityCard || record.personalNumber || record.goalUserId)!;
         const di: digitalIdentityObj = buildDI(record, identifier);
-        const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record, di.uniqueId) : null;
+        const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record) : null;
         const og: organizationGroupObj | null = role ? buildOG(record) : null;
         expect(role).toEqual(null);
         expect(og).toEqual(null);
@@ -70,7 +70,7 @@ describe('Match City unit testings', () => {
         };
         const identifier: string = (record.identityCard || record.personalNumber || record.goalUserId)!;
         const di: digitalIdentityObj = buildDI(record, identifier);
-        const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record, di.uniqueId) : null;
+        const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record) : null;
         const og: organizationGroupObj | null = role ? buildOG(record) : null;
         expect(og).toEqual({
             name: 'ea',
