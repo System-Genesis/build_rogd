@@ -14,7 +14,7 @@ export default (record: matchedRecordType): void => {
     const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record) : null;
     const og: organizationGroupObj | null = role ? buildOG(record) : null;
 
-    if (!role) logger.warn(false, 'SYSTEM', `Role and Group not created`, `Role and Group for DI ${di.uniqueId}`);
+    if (!role) logger.warn(false, 'APP', `Role and Group not created`, `Role and Group for DI ${di.uniqueId}`);
 
     sendToCreate(di, og, role);
 };
