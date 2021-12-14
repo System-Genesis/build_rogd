@@ -1,3 +1,4 @@
+import logger from 'logger-genesis';
 import matchedRecordType from './types/matchedRecord';
 import buildDI from './builds/buildDI';
 import buildRole from './builds/buildRole';
@@ -12,6 +13,8 @@ export default (record: matchedRecordType): void => {
     const di: digitalIdentityObj = buildDI(record, identifier);
     const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record) : null;
     const og: organizationGroupObj | null = role ? buildOG(record) : null;
+
+    if (!role) logger.warn(false, 'SYSTEM', `Role and Group not created`, `Role and Group for DI ${di.uniqueId}`);
 
     sendToCreate(di, og, role);
 };
