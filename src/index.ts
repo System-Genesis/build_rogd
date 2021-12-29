@@ -1,12 +1,15 @@
-import logger from 'logger-genesis';
-import { initializeRabbit } from './initializeRabbit';
+import initializeLogger from './logger';
+import { consumeQueues, initializeRabbit } from './initializeRabbit';
 
 require('dotenv').config();
 
 const main = async () => {
     await initializeRabbit();
+    await initializeLogger();
+    await consumeQueues();
 };
 
 main().catch((err) => {
-    logger.error(false, 'SYSTEM', 'Unknown error', err.message);
+    // eslint-disable-next-line no-console
+    console.log(err.message);
 });

@@ -6,15 +6,15 @@ import buildOG from './builds/buildOG';
 import digitalIdentityObj from './types/digitalIdentity';
 import roleObj from './types/role';
 import organizationGroupObj from './types/organizationGroup';
-import { sendToCreate } from './initializeRabbit';
+import { queueObject } from './types/queueObject';
 
-export default (record: matchedRecordType): void => {
+export default (record: matchedRecordType): queueObject => {
     const identifier: string = (record.identityCard || record.personalNumber || record.goalUserId)!;
     const di: digitalIdentityObj = buildDI(record, identifier);
     const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record) : null;
     const og: organizationGroupObj | null = role ? buildOG(record) : null;
 
-    if (!role) logger.warn(false, 'APP', `Role and Group not created`, `Role and Group for DI ${di.uniqueId}`);
+    if (!role) logger.warn(false, 'APP', `Role and Group were not created`, `Role and Group were not created for DI ${di.uniqueId}`);
 
-    sendToCreate(di, og, role);
+    return { di, og, role };
 };
