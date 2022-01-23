@@ -6,9 +6,9 @@ import buildOG from './builds/buildOG';
 import digitalIdentityObj from './types/digitalIdentity';
 import roleObj from './types/role';
 import organizationGroupObj from './types/organizationGroup';
-import { queueObject } from './types/queueObject';
+import { RODGObject } from './types/ROGDObject';
 
-export default (record: matchedRecordType): queueObject => {
+export default (record: matchedRecordType): RODGObject => {
     const identifier: string = (record.identityCard || record.personalNumber || record.goalUserId)!;
     const di: digitalIdentityObj = buildDI(record, identifier);
     const role: roleObj | null = record.hierarchy && di.isRoleAttachable ? buildRole(record) : null;
