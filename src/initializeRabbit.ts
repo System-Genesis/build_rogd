@@ -2,26 +2,24 @@
 import menash, { ConsumerMessage } from 'menashmq';
 import config from './config';
 import matchedRecord from './types/matchedRecord';
-import buildAllROGD from './buildROGD';
-import { queueObject } from './types/queueObject';
+import buildROGD from './buildROGD';
+import { RODGObject } from './types/ROGDObject';
 
 const { rabbit } = config;
-
-const consumeByQueue = (msg: ConsumerMessage, produceQueueName: string): void => {
-    const record: matchedRecord = msg.getContent() as matchedRecord;
-    const rogdObj: queueObject = buildAllROGD(record);
-    menash.send(produceQueueName, rogdObj);
-};
 
 export const initializeRabbit = async (): Promise<void> => {
     try {
         console.log('Trying connect to rabbit...');
 
         await menash.connect(rabbit.uri, rabbit.retryOptions);
-        await menash.declareQueue(rabbit.consumeNormalQueue);
-        await menash.declareQueue(rabbit.consumeMirQueue);
-        await menash.declareQueue(rabbit.produceNormalQueue);
-        await menash.declareQueue(rabbit.produceMirQueue);
+        await menash.declareTopology({
+            queues: [
+                { name: rabbit.consumeNormalQueue, options: { durable: true } },
+                { name: rabbit.consumeMirQueue, options: { durable: true } },
+                { name: rabbit.produceNormalQueue, options: { durable: true } },
+                { name: rabbit.produceMirQueue, options: { durable: true } },
+            ],
+        });
 
         console.log('Rabbit connected');
     } catch (err: any) {
@@ -32,7 +30,10 @@ export const initializeRabbit = async (): Promise<void> => {
 export const consumeQueues = async () => {
     await menash.queue(rabbit.consumeNormalQueue).activateConsumer(
         async (msg: ConsumerMessage) => {
-            consumeByQueue(msg, rabbit.produceNormalQueue);
+            const record: matchedRecord = msg.getContent() as matchedRecord;
+            const rogdObj: RODGObject = buildROGD(record);
+            menash.send(rabbit.consumeNormalQueue, rogdObj, { persistent: true });
+
             msg.ack();
         },
         { noAck: false },
@@ -40,7 +41,14 @@ export const consumeQueues = async () => {
 
     await menash.queue(rabbit.consumeMirQueue).activateConsumer(
         async (msg: ConsumerMessage) => {
-            consumeByQueue(msg, rabbit.produceMirQueue);
+            const record: matchedRecord = msg.getContent() as matchedRecord;
+            const identifiers = {
+                personalNumber: record.personalNumber,
+                identityCard: record.identityCard,
+                goalUserId: record.goalUserId,
+            };
+            const rogdObj: RODGObject = buildROGD(record);
+            menash.send(rabbit.consumeMirQueue, { ...rogdObj, identifiers }, { persistent: true });
             msg.ack();
         },
         { noAck: false },
