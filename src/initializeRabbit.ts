@@ -32,7 +32,7 @@ export const consumeQueues = async () => {
         async (msg: ConsumerMessage) => {
             const record: matchedRecord = msg.getContent() as matchedRecord;
             const rogdObj: RODGObject = buildROGD(record);
-            menash.send(rabbit.consumeNormalQueue, rogdObj, { persistent: true });
+            menash.send(rabbit.produceNormalQueue, rogdObj, { persistent: true });
 
             msg.ack();
         },
@@ -48,7 +48,7 @@ export const consumeQueues = async () => {
                 goalUserId: record.goalUserId,
             };
             const rogdObj: RODGObject = buildROGD(record);
-            menash.send(rabbit.consumeMirQueue, { ...rogdObj, identifiers }, { persistent: true });
+            menash.send(rabbit.produceMirQueue, { ...rogdObj, identifiers }, { persistent: true });
             msg.ack();
         },
         { noAck: false },
