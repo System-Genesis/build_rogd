@@ -8,6 +8,12 @@ import roleObj from './types/role';
 import organizationGroupObj from './types/organizationGroup';
 import { RODGObject } from './types/ROGDObject';
 
+/**
+ * Builds all the ROGD objects.
+ * Role and group my be null due to the record is from Mir source or doesn't have hierarchy. In that case sends a warning log
+ * @param { matchedRecordType } record - The record got from the queue.
+ * @return { RODGObject } - Object with digitalIdentity, role and group.
+ */
 export default (record: matchedRecordType): RODGObject => {
     const identifier: string = (record.identityCard || record.personalNumber || record.goalUserId)!;
     const di: digitalIdentityObj = buildDI(record, identifier);

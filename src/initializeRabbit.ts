@@ -7,6 +7,9 @@ import { RODGObject } from './types/ROGDObject';
 
 const { rabbit } = config;
 
+/**
+ * Connecting to Rabbit and declaring the queues
+ */
 export const initializeRabbit = async (): Promise<void> => {
     try {
         console.log('Trying connect to rabbit...');
@@ -27,7 +30,12 @@ export const initializeRabbit = async (): Promise<void> => {
     }
 };
 
-export const consumeQueues = async () => {
+/**
+ * Activate the flow of the record and sends the return value to the queue.
+ * Determine the flow by the record's source - different flow for Mir source
+ */
+export const consumeQueues = async (): Promise<void> => {
+    // Normal flow
     await menash.queue(rabbit.consumeNormalQueue).activateConsumer(
         async (msg: ConsumerMessage) => {
             const record: matchedRecord = msg.getContent() as matchedRecord;
@@ -39,9 +47,12 @@ export const consumeQueues = async () => {
         { noAck: false },
     );
 
+    // Mir source flow
     await menash.queue(rabbit.consumeMirQueue).activateConsumer(
         async (msg: ConsumerMessage) => {
             const record: matchedRecord = msg.getContent() as matchedRecord;
+
+            // Sends array of identifiers instead of one.
             const identifiers = {
                 personalNumber: record.personalNumber,
                 identityCard: record.identityCard,
