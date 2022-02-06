@@ -1,4 +1,4 @@
-#Build ROGD
+# Build ROGD
 
 Creates a digital identity, role and group objects from the given record.
 
