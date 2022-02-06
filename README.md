@@ -1,6 +1,7 @@
 #Build ROGD
 
 Creates a digital identity, role and group objects from the given record.
+
 Role and group may not be built for multiple reasons:
 
 1. The record doesn't have hierarchy field.
