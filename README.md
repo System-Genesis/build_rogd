@@ -1,11 +1,98 @@
-## TS Template
+#Build ROGD
 
-### Setup:
+Creates a digital identity, role and group objects from the given record.
+Role and group may not be built for multiple reasons:
 
-1. Install recommended VS Code extentions:
+1. The record doesn't have hierarchy field.
+2. The record is from Mir source.
 
-    - eslint 'dbaeumer.vscode-eslint'
-    - prettier 'esbenp.prettier-vscode'
+After creating all the objects, sends an object contains all the objects.
 
-2. Install node dependencies ('npm install')
-3. Everything should work now
+In case the record's source is Mir, also sends an array of all the record's identifiers.
+
+## Input
+
+```
+{
+    firstName?: string;
+    lastName?: string;
+    rank?: string;
+    clearance?: string;
+    sex?: string;
+    personalNumber?: string;
+    identityCard?: string;
+    dischargeDay?: string;
+    akaUnit?: string;
+    entityType?: string;
+    serviceType?: string;
+    mobilePhone?: string[];
+    phone?: string[];
+    birthDate?: string;
+    address?: string;
+    mail?: string;
+    job?: string;
+    hierarchy?: string;
+    userID?: string;
+    source?: string;
+    goalUserId?: string;
+    pictures?: picture;
+}
+```
+
+## Objects
+
+Digital Identity:
+
+```
+{
+    type: string;
+    source: string;
+    mail?: string;
+    uniqueId: string;
+    entityId: string;
+    isRoleAttachable: boolean;
+}
+```
+
+Role:
+
+```
+{
+    roleId: string;
+    jobTitle?: string;
+    source: string;
+};
+```
+
+Group:
+
+```
+{
+    name: string;
+    source: string;
+    hierarchy: string;
+};
+```
+
+## Output
+
+-   Mir source:
+
+```
+    {
+        di: digitalIdentityType;
+        role: roleType;
+        group: groupType;
+        identifiers: string[];
+    }
+```
+
+-   Other sources:
+
+```
+    {
+        di: digitalIdentityType;
+        role: roleType;
+        group: groupType;
+    }
+```
