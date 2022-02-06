@@ -9,7 +9,8 @@ Role and group may not be built for multiple reasons:
 
 After creating all the objects, sends an object contains all the objects to the Create RGBE service.
 
-In case the record's source is Mir, also sends an array of all the record's identifiers.
+In case the record's source is Mir, the digitalIdentity is not role attachable and virtualUser type.
+Also sends an array of all the record's identifiers.
 
 ## Objects
 
