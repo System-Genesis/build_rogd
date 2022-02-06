@@ -10,35 +10,6 @@ After creating all the objects, sends an object contains all the objects.
 
 In case the record's source is Mir, also sends an array of all the record's identifiers.
 
-## Input
-
-```
-{
-    firstName?: string;
-    lastName?: string;
-    rank?: string;
-    clearance?: string;
-    sex?: string;
-    personalNumber?: string;
-    identityCard?: string;
-    dischargeDay?: string;
-    akaUnit?: string;
-    entityType?: string;
-    serviceType?: string;
-    mobilePhone?: string[];
-    phone?: string[];
-    birthDate?: string;
-    address?: string;
-    mail?: string;
-    job?: string;
-    hierarchy?: string;
-    userID?: string;
-    source?: string;
-    goalUserId?: string;
-    pictures?: picture;
-}
-```
-
 ## Objects
 
 Digital Identity:
@@ -72,6 +43,35 @@ Group:
     source: string;
     hierarchy: string;
 };
+```
+
+## Input
+
+```
+{
+    firstName?: string;
+    lastName?: string;
+    rank?: string;
+    clearance?: string;
+    sex?: string;
+    personalNumber?: string;
+    identityCard?: string;
+    dischargeDay?: string;
+    akaUnit?: string;
+    entityType?: string;
+    serviceType?: string;
+    mobilePhone?: string[];
+    phone?: string[];
+    birthDate?: string;
+    address?: string;
+    mail?: string;
+    job?: string;
+    hierarchy?: string;
+    userID?: string;
+    source?: string;
+    goalUserId?: string;
+    pictures?: picture;
+}
 ```
 
 ## Output
