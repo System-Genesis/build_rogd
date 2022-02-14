@@ -16,10 +16,8 @@ export default (record: matchedRecordType, identifier: string): digitalIdentityO
         uniqueId: record.userID,
         entityId: identifier,
         isRoleAttachable: record.source !== fieldNames.sources.mir,
+        ...(record.mail ? { mail: record.mail } : undefined),
     };
-
-    // Mail is not required
-    if (record.mail) digitalIdentity.mail = record.mail;
 
     return digitalIdentity;
 };
