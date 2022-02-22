@@ -28,7 +28,7 @@ describe('Match City unit testings', () => {
         const og: organizationGroupObj | null = role ? buildOG(record) : null;
         expect(role).toEqual(null);
         expect(og).toEqual(null);
-        expect(di.type).toEqual('kaki');
+        expect(di.type).toEqual('virtualUser');
     });
 
     test("No hierarchy -> don't build OG and Role", () => {
@@ -76,7 +76,6 @@ describe('Match City unit testings', () => {
             name: 'ea',
             source: 'es_name',
             hierarchy: 'wallmart/dolorem',
-            status: 'active',
         });
     });
 });
