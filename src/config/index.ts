@@ -17,6 +17,7 @@ const config = {
     },
     systemName: env.get('SYSTEM_NAME').required().asString(),
     serviceName: env.get('SERVICE_NAME').required().asString(),
+    port: env.get('PORT').required().asInt(),
 };
 
 export default config;

@@ -1,5 +1,6 @@
 import initializeLogger from './logger';
 import { consumeQueues, initializeRabbit } from './initializeRabbit';
+import initializeHttp from './http/app';
 
 require('dotenv').config();
 
@@ -8,6 +9,7 @@ require('dotenv').config();
  * Calls all the initializations
  */
 const main = async () => {
+    initializeHttp();
     await initializeRabbit();
     await initializeLogger();
     await consumeQueues();
