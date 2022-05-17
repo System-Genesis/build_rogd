@@ -20,6 +20,9 @@ type matchedRecord = {
     userID: string;
     source: string;
     goalUserId?: string;
+    employeeId?: string;
+    employeeNumber?: string;
+    organization?: string;
 };
 
 export default matchedRecord;
